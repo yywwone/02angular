@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+        var App=angular.module("app",[]);
+
+
+        App.config(["$filterProvider",function($filterProvider){
+                //注册了一个过滤器，新增了一个过滤器
+                $filterProvider.register("addPerson",function(){
+                        return function(arg1,arg2){
+                            console.log(arg1);
+                            console.log(arg2);
+                            return "老赵 爱心 "+arg2;
+                        }
+                });
+        }]);
+        //现在有一个$log 的服务,现在我要配置$log 的服务的功能.
+        App.controller("appController",["$scope","$filter",function($scope,$filter){
+                //我要调用
+                $scope.result=$filter("addPerson")("老赵","孙杰");
+        }]);
+
+
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+        {{result}}
+</body>
+</html>

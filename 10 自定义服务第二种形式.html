@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>行内式注入</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+        var App=angular.module("app",[]);
+
+
+
+        //创建服务器的第二种方式 factory
+        App.factory("StringUtils",function(){
+             return {
+                    reverseStr:function(str){
+                            return str;
+                    }
+             }
+        })
+
+        App.controller("appcontroller",["$scope","$filter","StringUtils",function($scope,$filter,StringUtils){
+                var str=StringUtils.reverseStr("hello lao zhao");
+                console.log(str);
+        }])
+    </script>
+</head>
+<body ng-app="app" ng-controller="appcontroller">
+
+</body>
+</html>

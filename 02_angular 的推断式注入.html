@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>推断式注入</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+            var App=angular.module("app",[]);
+
+            /*
+            * 这种注入叫做推断式注入
+            * 推断式注入是通过形参的方式注入 ，而且形参的名字必须跟angular 模块的名字一样
+            * 我们之前学习了一些工具（webpack）
+            * 如果我使用webpack，它可以把这些js 代码进行压缩处理 形参就会变成简写形式
+            * 推断式注入，angular 就找不到对应的模块，就会报错.
+            * */
+            App.controller("appcontroller",function($scope,$filter){
+                    $scope.username="张三";
+                    $scope.date=$filter("date")(new Date(),"yyyy-MM-dd");
+            });
+    </script>
+</head>
+<body ng-app="app" ng-controller="appcontroller">
+      {{username}}
+      <p>{{date}}</p>
+</body>
+</html>

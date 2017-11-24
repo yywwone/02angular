@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="libs/angular.min.js"></script>
+    <script src="libs/angular-route.js"></script>
+    <script>
+        //现在基于这些步骤，我可以在我的应用里面使用单页面应用
+        var App=angular.module("app",["ngRoute"]);
+        /*
+         * 改造一个单页面应用
+         *      1: 导航的位置 锚点
+         *      2：内容显示的区域
+         *      3：配置路由
+         * */
+        /*配置路由，属于配置层面 config*/
+        App.config(["$routeProvider",function($routeProvider){
+            //在这里面去进行配置
+            //通过$routeProvider 提供的api 去进行配置.
+            //when 方法 当
+            //otherwise 否则 跳转到一个默认的锚点
+            //templateUrl 让匹配到锚点之后去加载一个页面.
+            $routeProvider.when("/home",{
+                   templateUrl:"template/home.html"
+            }).when("/category/:categoryId/:page/home",{
+                  templateUrl:"template/category.html",
+                  controller:"categoryController"
+            }).when("/cart",{
+                  templateUrl:"template/cart.html"
+            }).when("/mime",{
+                  templateUrl:"template/mime.html"
+            }).otherwise({
+                 redirectTo:"/home"
+            })
+        }]);
+
+        //去接收数据
+        App.controller("categoryController",["$scope","$http","$routeParams","$location",function($scope,$http,$routeParams,$location){
+                 //这种形式的参数，我们使用$routeParams 去接收
+                console.log($routeParams);
+                console.log($location.search());
+        }])
+
+
+
+    </script>
+</head>
+<body ng-app="app">
+<ul>
+    <li><a href="#/home">首页</a></li>
+    <!--查询分类 发送参数，参数名，参数值 -->
+    <li><a href="#/category/11/1/home">护肤品</a></li>
+    <li><a href="#/cart">购物车</a></li>
+    <li><a href="#/mine">我的</a></li>
+</ul>
+<!--使用一个指令  -->
+<div  ng-view>
+
+</div>
+</body>
+</html>

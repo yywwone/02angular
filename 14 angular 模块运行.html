@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+        var App=angular.module("app",[]);
+
+        //单独运行
+        App.run(["$http","$filter","$rootScope",function($http,$filter,$rootScope){
+                //可能通过$http 获取天气预报的数据，初始化到页面上面
+                $http({
+                     url:"api/angularget.php",
+                     method:"get"
+                }).success(function(data){
+                    console.log(data);
+                    //这里的数据要过来. 之前我们是dom 操作.  angular 是mvvm 的框架.
+
+                    //每个应用都对应一个根作用域 $rootScope ，可以往这个上面绑定
+                    //假设可以绑定，根作用域上面的数据在应用上面的所有范围共享
+                    $rootScope.data=data;
+
+                });
+        }])
+
+
+    </script>
+</head>
+<body ng-app="app" >
+        <!--放在这个span 里面.-->
+        <span>{{data}}</span>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>行内式注入</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+        var App=angular.module("app",[]);
+
+
+
+        //自定义服务的第一种方式.  directive  filter  service
+
+
+        //创建一个服务器，这个服务的名称叫做DateUtils
+        //在这个DateUtils 服务器下面在绑定了一个方法getCurrentTime
+        //假设getCurrentTime 要绑定在DateUtils 对象下面，
+        //this 必须指向到DateUtils
+        //假设要这个this 指向到DateUtils  call apply 将一个方法的调用委派给另外的一个对象.
+        App.service("DateUtils",function(){
+                this.getCurrentTime=function(){
+                     console.log("http://www.itcast.cn");
+                }
+                this.getCurrentTimeByStyle=function(arg1){
+                    console.log(arg1);
+                }
+        });
+
+
+        App.controller("appcontroller",["$scope","$filter","DateUtils",function($scope,$filter,DateUtils){
+             DateUtils.getCurrentTime();
+             DateUtils.getCurrentTimeByStyle("yyyy-MM-dd");
+        }])
+    </script>
+</head>
+<body ng-app="app" ng-controller="appcontroller">
+
+</body>
+</html>

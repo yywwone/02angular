@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>angular 模板</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+        var App=angular.module("app",[]);
+
+        //通过config 去配置，我要配置的是$log，通过注入它的$logProvider 去配置.
+        App.config(["$logProvider",function($logProvider){
+                //通过$logProvider 配置$log 功能
+
+                //这个方法可以开启一个配置，禁用debug 方法或者其其中这个方法 true false
+                $logProvider.debugEnabled(false);
+
+        }])
+
+        //现在有一个$log 的服务,现在我要配置$log 的服务的功能.
+        App.controller("appController",["$scope","$log",function($scope,$log){
+                 $log.debug("我是这个方法");
+        }]);
+
+
+    </script>
+</head>
+<body ng-app="app" ng-controller="appController">
+
+</body>
+</html>

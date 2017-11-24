@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>行内式注入</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+        var App=angular.module("app",[]);
+
+
+
+        //创建服务的第三种形式value 定义常量
+        App.value("author","小旋风");
+        App.value("version","1.1");
+        App.controller("appcontroller",["$scope","$filter","author","version",function($scope,$filter,author,version){
+            console.log(author);
+            console.log(version);
+
+        }])
+    </script>
+</head>
+<body ng-app="app" ng-controller="appcontroller">
+
+</body>
+</html>

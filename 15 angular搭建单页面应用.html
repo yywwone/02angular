@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="libs/angular.min.js"></script>
+    <script src="libs/angular-route.js"></script>
+    <script>
+         //现在基于这些步骤，我可以在我的应用里面使用单页面应用
+         var App=angular.module("app",["ngRoute"]);
+         /*
+         * 改造一个单页面应用
+         *      1: 导航的位置 锚点
+         *      2：内容显示的区域
+         *      3：配置路由
+         * */
+         /*配置路由，属于配置层面 config*/
+         App.config(["$routeProvider",function($routeProvider){
+                 //在这里面去进行配置
+                 //通过$routeProvider 提供的api 去进行配置.
+                 //when 方法 当
+                 //otherwise 否则 跳转到一个默认的锚点
+                $routeProvider.when("/laozhao",{
+                      template:"我是老赵他哥小旋风"
+                }).when("/xiaoxuanfeng",{
+                      template:"我是小旋风他弟老赵"
+                }).when("/ximenqing",{
+                      template:"我是西门庆的大表哥汪磊"
+                }).when("/wanglei",{
+                      template:"我是汪磊的小表弟娘娘"
+                }).when("/wangzhaohua",{
+                      template:"我是娘娘"
+                }).otherwise({
+                      redirectTo:"/laozhao"
+                })
+         }]);
+
+
+
+
+    </script>
+</head>
+<body ng-app="app">
+        <ul>
+            <li><a href="#/laozhao">老赵</a></li>
+            <li><a href="#/xiaoxuanfeng">小旋风</a></li>
+            <li><a href="#/ximenqing">西门庆</a></li>
+            <li><a href="#/wanglei">汪磊</a></li>
+            <li><a href="#/wangzhaohua">娘娘</a></li>
+        </ul>
+       <!--使用一个指令  -->
+        <div  ng-view>
+
+        </div>
+</body>
+</html>

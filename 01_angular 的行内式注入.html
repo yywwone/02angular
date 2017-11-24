@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>行内式注入</title>
+    <script src="libs/angular.min.js"></script>
+    <script>
+            var App=angular.module("app",[]);
+
+            //需要使用到angular 的一些功能,$filter 过滤器，我要使用，我就需要注入
+            //angular 的每个模块有个名称，根据名称进行注入
+            //我们把现在的这种方式的注入，叫做行内式注入
+            //第二个参数传递的是一个数组.
+            App.controller("appcontroller",["$scope","$filter",function($scope,$filter){
+
+            }])
+    </script>
+</head>
+<body ng-app="app" ng-controller="appcontroller">
+
+</body>
+</html>
